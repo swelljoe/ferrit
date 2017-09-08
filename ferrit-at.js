@@ -24,7 +24,7 @@ fs.ensureDirSync('public/img')
 for ( let screen_name of screen_names ) {
   let fcodes = {}
   fs.ensureDirSync('public/' + screen_name)
-  T.get('statuses/user_timeline', { screen_name: screen_name, count: 1 }, function(err, data, response) {
+  T.get('statuses/user_timeline', { screen_name: screen_name, count: 20 }, function(err, data, response) {
     if(!err) {
       data.forEach(function(element) {
         /* fcode is the twitter ID encoded to make it shorter */
@@ -36,7 +36,6 @@ for ( let screen_name of screen_names ) {
         fcodes[fcode] = element['text']
       })
       let indexhtml = genindexpage(fcodes, screen_name, screen_names)
-      console.log(fcodes)
       writeindex(screen_name, indexhtml)
     }
   })
