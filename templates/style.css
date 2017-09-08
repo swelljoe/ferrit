@@ -1,0 +1,39 @@
+.top-fixed {
+	height: 28px;
+	background-color: #222222;
+	color: #dddddd;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 0.8em;
+}
+.top-message {
+	vertical-align: middle;
+	text-align: center;
+	padding: 6px;
+}
+.header {
+	margin: 28px 0 10px;
+	background-color: #dddddd;
+	height: 48px;
+	border-bottom: 1px solid #bbbbbb;
+}
+.header .pseudo.button {
+	border-radius: 50%;
+	background-color: #f9f9f9;
+	padding: .6em;
+	border: 1px solid #bbbbbb;
+}
+.header .pseudo.button:hover {
+	border: 1px solid #2b72b5;
+}
+body {
+	background-color: #f9f9f9;
+}
+.card .download, .card .facebook-share, .card .twitter-share-button {
+	height: 40px;
+	width: 40px;
+	border-right: 1px solid #bbbbbb;
+}
+img.ferrit {
+	width:700px;
+}

@@ -1,0 +1,14 @@
+[general]
+my_url = 'http://ferrit.us'
+my_name = 'ferrit!'
+my_twitter = 'ferritus'
+
+[twitter]
+consumer_key = ''
+consumer_secret = ''
+access_token = ''
+access_token_secret = ''
+
+[ferrits]
+screen_names = [ 'dril', 'dog_rates' ]
+hashtags = [ '#ferrets' ]

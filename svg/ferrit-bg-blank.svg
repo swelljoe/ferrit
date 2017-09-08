@@ -52,9 +52,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="942.59395"
-     inkscape:cy="507.891"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="698.87683"
+     inkscape:cy="225.04829"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -168,8 +168,8 @@
            sodipodi:role="line">..</tspan></text>
     </g>
     <path
-       style="fill:none;stroke:#232323;stroke-width:0.665;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 56.719661,40.35415 10e-7,233.042"
+       style="fill:none;stroke:#232323;stroke-width:0.66721994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 56.719661,40.35415 10e-7,234.6005"
        id="path5928"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -228,13 +228,13 @@
          style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.15263487" />
     </g>
     <rect
-       style="fill:none;fill-opacity:1;stroke:#232323;stroke-width:0.6408816;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#232323;stroke-width:0.68370438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect6000"
-       width="226.18765"
-       height="16.661547"
-       x="76.972313"
-       y="256.22687"
-       ry="4.247937e-14" />
+       width="233.38142"
+       height="18.378031"
+       x="76.993729"
+       y="256.24826"
+       ry="4.6855623e-14" />
     <text
        xml:space="preserve"
        style="font-weight:bold;font-stretch:condensed;font-size:14.11111069px;font-family:'PT Sans Narrow';-inkscape-font-specification:'PT Sans Narrow, Bold Condensed';writing-mode:lr-tb;stroke-width:0.26458332"
