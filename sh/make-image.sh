@@ -4,6 +4,8 @@ author=$2
 date=$(date +%D -d "$3")
 ferritcode=$4
 
+mkdir -p tmp/
+
 # Overlay message
 gm convert -font "ttf/PTN77F.ttf" -pointsize 98 -fill '#232323' -draw "text 289,393 '“${message}”\n— ${author}'" assets/img/ferrit-bg-blank.png "tmp/${ferritcode}.png"
 
