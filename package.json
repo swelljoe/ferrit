@@ -22,5 +22,14 @@
   "bugs": {
     "url": "https://github.com/swelljoe/ferrit/issues"
   },
-  "homepage": "https://github.com/swelljoe/ferrit#readme"
+  "homepage": "https://github.com/swelljoe/ferrit#readme",
+  "dependencies": {
+    "alphanumeric-twitter-id": "^1.0.0",
+    "config": "^1.26.2",
+    "fs-extra": "^4.0.1",
+    "handlebars": "^4.0.10",
+    "moment": "^2.18.1",
+    "qrcode": "^0.9.0",
+    "twit": "^2.2.9"
+  }
 }
