@@ -17,13 +17,14 @@
 	height: 48px;
 	border-bottom: 1px solid #bbbbbb;
 }
-.header .pseudo.button {
+.header .pseudo.button, .social-bar .pseudo.button {
 	border-radius: 50%;
 	background-color: #f9f9f9;
-	padding: .6em;
+	padding: .7em;
+	min-width: 40px;
 	border: 1px solid #bbbbbb;
 }
-.header .pseudo.button:hover {
+.pseudo.button:hover {
 	border: 1px solid #2b72b5;
 }
 body {
@@ -35,5 +36,31 @@ body {
 	border-right: 1px solid #bbbbbb;
 }
 img.ferrit {
-	width:700px;
+	width:100%;
+	margin: 0;
+	padding: 0;
+	border-radius: 0.3em;
+	border: 1px solid #cccccc;
+}
+.container {
+	margin: 128px auto 0px auto;
+	max-width: 960px;
+}
+.fcode {
+	padding: 4px 8px;
+	margin-bottom: 24px;
+	background-color: #2b72b5;
+	color: #ffffff;
+	font-weight: bolder;
+	border-radius: 0.2em;
+}
+.social-bar {
+	position: fixed;
+	left: 10px;
+	width:52px;
+	margin: auto;
+	top: 220px;
+}
+.card p {
+	font-size: smaller;
 }

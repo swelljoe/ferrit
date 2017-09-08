@@ -5,8 +5,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/picnic@6.4.0/picnic.min.css">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="icon" type="image/png" href="/img/ferrit-logo.png">
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+  <link rel="icon" type="image/png" href="/assets/img/ferrit-logo.png">
   <script src="https://use.fontawesome.com/b7d9aa9e12.js"></script>
 	<title>{{screen_name}} ferrified</title>
 
@@ -22,12 +22,8 @@
 <div class='top-fixed'><div class="top-message">Media for the 69...nice...million</div></div>
 <nav class="header">
   <a href="#" class="brand">
-    <img class="logo" src="/img/ferrit-logo.png" />
+    <img class="logo" src="/assets/img/{{logo_img}}" />
   </a>
-
-  <!-- responsive-->
-  <input id="bmenub" type="checkbox" class="show">
-  <label for="bmenub" class="burger pseudo button">menu</label>
 
   <div class="menu">
     <a href="http://twitter.com/ferritus" class="pseudo button fa fa-twitter" alt="twitter">
@@ -39,6 +35,52 @@
   </div>
 </nav>
 
-	{{{card_html}}}
+<!--Twitter metadata, unique for each tweet -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@{{my_twitter}}">
+<meta name="twitter:creator" content="@{{screen_name}}">
+<meta name="twitter:title" content="Tweet-verified fact">
+<meta name="twitter:description" content="#ferritfacts">
+<meta name="twitter:image" content="{{my_url}}/img/{{fcode}}.png">
 
+<div class="social-bar">
+	<a class="pseudo button fa fa-twitter twitter-share-button" href="https://twitter.com/share?text={{my_url}}/{{fcode}}&amp;via={{my_twitter}}" class="twitter-share-button"
+		data-hashtags="ferritfacts" data-related="ferritus"
+		data-show-count="false"></a>
+	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <a class='pseudo button fa fa-facebook facebook-share' href='https://www.facebook.com/sharer/sharer.php?u={{my_url}}/{{fcode}}' alt='Share on facebook'></a>
+	<a class='pseudo button fa fa-envelope' href='mailto:?subject=Check out what {{screen_name}} tweeted&amp;body="{{text}}" - {{my_url}}/{{fcode}}' alt='Share via email'></a>
+	<a class='pseudo button fa fa-download' href='/img/{{fcode}}.png'></a>
+</div>
+
+<div class="container">
+<div class="flex five">
+	<div class="four-fifth">
+  	<div class='ferrit'>
+    	{{#if summary}}
+    	<header>
+      	{{summary}}
+    	</header>
+    	{{/if}}
+    	<a href='http://twitter.com/{{screen_name}}/status/{{id}}'>
+      	<img class='ferrit' src='/img/{{fcode}}.png' alt='{{text}}'></a>
+  	</div>
+	</div>
+	<div>
+	<!-- Meta data section -->
+		<div class="fcode">ferrit #{{fcode}}</div>
+		<article class="card">
+			<header>Text</header>
+			<p>“{{text}}”</p>
+		</article>
+
+		<article class="card">
+			<header>Source</header>
+			<p><a href='http://twitter.com/{{screen_name}}/status/{{id}}'>
+			  <i class="fa fa-external-link-square"></i> Twitter {{created_at}}
+			</a></p>
+		</article>
+	</div>
+</div>
+</div>
 </body>

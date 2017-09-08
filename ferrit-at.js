@@ -8,8 +8,10 @@ const qrcode = require('qrcode')
 const config = require('config')
 const fs = require('fs')
 const handlebars = require('handlebars')
+const moment = require('moment')
 
 let my_url = config.get('general.my_url')
+let my_twitter = config.get('general.my_twitter')
 
 /* Sets up twitter authentiction from the config file. Put it in production.toml
 and don't check that file into git. */
@@ -23,9 +25,8 @@ T.get('statuses/user_timeline', { screen_name: screen_name, count: 1 }, function
       let fcode = alphanumtwid.encode(element['id'])
       genqr(fcode)
       .then((qrname) => genimage(fcode, element))
-      .then(() => gencard(fcode, element))
-      .then((partial) => gensinglepage(fcode, element, partial))
-      .then((html) => console.log(html))
+      .then(() => gensinglepage(fcode, element))
+      .then((html) => writepage(fcode, element, html))
     })
   }
 })
@@ -66,32 +67,18 @@ const genimage = (fcode, element) => {
   })
 }
 
-/* gencard(card_data)
-Generates a card fragment, which can be used on the main page or on a single
-card page. Receives a card_data object, and returns HTML for the card.
-*/
-const gencard = (fcode, element) => {
-  card_data = {
-    screen_name: element['user']['screen_name'],
-    id: element['id_str'],
-    fcode: fcode,
-    text: element['text'],
-    single_page: true
-  }
-
-  /* Synchronous, because I don't even care. */
-  let html = fs.readFileSync('templates/partials/card.hbs', 'utf8')
-  return (card_data, hbsToString(html, card_data))
-}
-
-const gensinglepage = (fcode, element, card_html) => {
+/* Generate a single page for one tweet. */
+const gensinglepage = (fcode, element) => {
+  created_at = moment(element['created_at'], 'dd MMM DD HH:mm:ss ZZ YYYY').format('MM/DD/YYYY')
   context = {
     screen_name: element['user']['screen_name'],
     id: element['id_str'],
+    created_at: created_at,
     fcode: fcode,
     text: element['text'],
-    card_html: card_html,
-    single_page: 'yes'
+    single_page: true,
+    my_url: my_url,
+    my_twitter: my_twitter
   }
   let html = fs.readFileSync('templates/index_single.hbs', 'utf8')
   return (hbsToString(html, context))
@@ -102,4 +89,19 @@ Combine handlebars template with data to make html */
 const hbsToString = (html, context) => {
   let template = handlebars.compile(html)
   return template(context)
+}
+
+/* writepage(fcode, element, html)
+Write a single ferrit page to disk. */
+const writepage = (fcode, element, html) => {
+  destpath = 'public/' + element['user']['screen_name'] + '/'
+  fs.stat(destpath, (err) => {
+    if (err) {
+      /* doesn't exist, create it */
+      fs.mkdirSync(destpath, (err) => { if(err) throw err })
+    }
+  })
+  fs.writeFile(destpath + fcode + '.html', html, (err) => {
+    if(err) throw err
+  })
 }
