@@ -1,0 +1,26 @@
+{
+  "name": "ferrit",
+  "version": "1.0.0",
+  "description": "ferrit features ferrified facts",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swelljoe/ferrit.git"
+  },
+  "keywords": [
+    "site",
+    "generator"
+  ],
+  "author": "Joe Cooper <swelljoe@gmail.com> (http://swelljoe.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/swelljoe/ferrit/issues"
+  },
+  "homepage": "https://github.com/swelljoe/ferrit#readme"
+}
