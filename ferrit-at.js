@@ -19,23 +19,24 @@ and don't check that file into git. */
 const T = new Twit( config.get('twitter') );
 
 let screen_names = config.get('ferrits.screen_names')
+let hashtags = config.get('ferrits.hashtags')
 
 fs.ensureDirSync('public/img')
-for ( let screen_name of ['fart'] ) {
+for ( let screen_name of screen_names ) {
   let fcodes = {}
   fs.ensureDirSync('public/' + screen_name)
-  T.get('statuses/user_timeline', { screen_name: screen_name, count: 12 }, function(err, data, response) {
+  T.get('statuses/user_timeline', { screen_name: screen_name, count: 16 }, function(err, data, response) {
     if(!err) {
       data.forEach(function(element) {
         /* fcode is the twitter ID encoded to make it shorter */
         let fcode = alphanumtwid.encode(element['id'])
         genqr(fcode)
         .then((qrname) => genimage(fcode, element))
-        .then(() => gensinglepage(fcode, element, screen_names))
+        .then(() => gensinglepage(fcode, element, screen_names, hashtags))
         .then((html) => writepage(fcode, element, html))
         fcodes[fcode] = element['text']
       })
-      let indexhtml = genindexpage(fcodes, screen_name, screen_names)
+      let indexhtml = genindexpage(fcodes, screen_name, screen_names, hashtags)
       writeindex(screen_name, indexhtml)
       fs.copySync('assets/', 'public/assets/')
     }
@@ -86,6 +87,7 @@ const gensinglepage = (fcode, element, screen_names) => {
   context = {
     screen_name: element['user']['screen_name'],
     screen_names: screen_names,
+    hashtags: hashtags,
     id: element['id_str'],
     created_at: created_at,
     fcode: fcode,
@@ -121,6 +123,7 @@ const genindexpage = (fcodes, screen_name, screen_names) => {
   context = {
     screen_name: screen_name,
     screen_names: screen_names,
+    hashtags: hashtags,
     fcodes: fcodes,
     my_url: my_url,
     my_twitter: my_twitter,

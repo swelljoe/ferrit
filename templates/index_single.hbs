@@ -21,19 +21,49 @@
 <body>
 <div class='top-fixed'><div class="top-message">Media for the 69...nice...million</div></div>
 <nav class="header">
-  <a href="#" class="brand">
+  <a href="/" class="brand">
     <img class="logo" src="{{my_logo}}" />
   </a>
 
   <div class="menu">
     <a href="http://twitter.com/ferritus" class="pseudo button fa fa-twitter" alt="twitter">
     </a>
-    <a href="#hashtags" class="pseudo button fa fa-hashtag" alt="hashtag ferrits">
-    </a>
-    <a href="#users" class="pseudo button fa fa-user" alt="user ferrits">
-    </a>
+		<label for="modal_hashtags" class="pseudo button fa fa-hashtag"></label>
+    <label for="modal_users" class="pseudo button fa fa-user"></label>
   </div>
 </nav>
+
+<div class="modal">
+	<input id="modal_hashtags" type="checkbox" />
+	<label for="modal_hastags" class="overlay"></label>
+	<article>
+		<section class="content">
+		<div class="flex two">
+		{{#each hashtags}}
+			<div>
+				<a class="pseudo button" href="/{{this}}">#{{this}}</a>
+			</div>
+		{{/each}}
+		</section>
+		</div>
+	</article>
+</div>
+
+<div class="modal">
+	<input id="modal_users" type="checkbox" />
+	<label for="modal_users" class="overlay"></label>
+	<article>
+		<section class="content">
+		<div class="flex two">
+		{{#each screen_names}}
+			<div>
+				<a class="pseudo button" href="/{{this}}">@{{this}}</a>
+			</div>
+		{{/each}}
+		</section>
+		</div>
+	</article>
+</div>
 
 <!--Twitter metadata, unique for each tweet -->
 <meta name="twitter:card" content="summary_large_image">
@@ -84,3 +114,12 @@
 </div>
 </div>
 </body>
+
+<script>
+document.onkeydown = function(e){
+  if (e.keyCode == 27) {
+    var mods = document.querySelectorAll('.modal > [type=checkbox]');
+    [].forEach.call(mods, function(mod){ mod.checked = false; });
+  }
+}
+</script>

@@ -68,3 +68,8 @@ img.ferrit {
 .card p {
 	font-size: smaller;
 }
+.modal .content {
+	border-top: 8px solid #232323;
+	background-color: #f9f9f9;
+	text-align: center;
+}
