@@ -54,7 +54,7 @@ img.ferrit:hover {
 	max-width: 960px;
 }
 .fcode {
-	padding: 4px 8px;
+	padding: 4px 8px 0;
 	margin-bottom: 24px;
 	background-color: #2b72b5;
 	color: #ffffff;
@@ -75,4 +75,5 @@ img.ferrit:hover {
 	border-top: 8px solid #232323;
 	background-color: #f9f9f9;
 	text-align: center;
+	min-width: 280px;
 }
