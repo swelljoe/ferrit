@@ -21,10 +21,10 @@ const T = new Twit( config.get('twitter') );
 let screen_names = config.get('ferrits.screen_names')
 
 fs.ensureDirSync('public/img')
-for ( let screen_name of screen_names ) {
+for ( let screen_name of ['fart'] ) {
   let fcodes = {}
   fs.ensureDirSync('public/' + screen_name)
-  T.get('statuses/user_timeline', { screen_name: screen_name, count: 20 }, function(err, data, response) {
+  T.get('statuses/user_timeline', { screen_name: screen_name, count: 12 }, function(err, data, response) {
     if(!err) {
       data.forEach(function(element) {
         /* fcode is the twitter ID encoded to make it shorter */
@@ -37,6 +37,7 @@ for ( let screen_name of screen_names ) {
       })
       let indexhtml = genindexpage(fcodes, screen_name, screen_names)
       writeindex(screen_name, indexhtml)
+      fs.copySync('assets/', 'public/assets/')
     }
   })
 }
@@ -62,11 +63,13 @@ const genqr = (fcode) => {
 genimage generates an image with the given details and returns a filename.
 element is the result object from the twitter query. */
 const genimage = (fcode, element) => {
+  let text = element['text'].replace(/'/g, `’`)
+  let screen_name = element['user']['screen_name']
+  let created_at = element['created_at']
   return new Promise((resolve, reject) => {
     /* Call out to a script that does the graphics magick work */
-    child_process.exec("sh/make-image.sh '" + element['text'] + "' '" +
-    element['user']['screen_name'] + "' '" + element['created_at'] + "' '" +
-    fcode + "'", function(imgname, err) {
+    child_process.exec("sh/make-image.sh '" + text + "' '" + screen_name
+      + "' '" + created_at + "' '" + fcode + "'", function(imgname, err) {
       if(err) {
         reject(err)
       }
@@ -136,3 +139,13 @@ const writeindex = (screen_name, html) => {
     if(err) throw err
   })
 }
+
+// escape single-quotes in strings
+const escapeShellArg = (arg) => {
+  // Sanitise all space (newlines etc.) to a single space
+  string.replace(/\s+/g, " ");
+  // Optionally remove leading and trailing space
+  string.replace(/^\s+|\s+$/g, " ");
+  // Quote with single quotes, escaping backslashes and single quotes
+  return string.replace(/'/g, `"'"`);
+};
