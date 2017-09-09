@@ -20,12 +20,13 @@ const T = new Twit( config.get('twitter') );
 
 let screen_names = config.get('ferrits.screen_names')
 let hashtags = config.get('ferrits.hashtags')
+let count = config.get('ferrits.count')
 
 fs.ensureDirSync('public/img')
 for ( let screen_name of screen_names ) {
   let fcodes = {}
   fs.ensureDirSync('public/' + screen_name)
-  T.get('statuses/user_timeline', { screen_name: screen_name, count: 16 }, function(err, data, response) {
+  T.get('statuses/user_timeline', { screen_name: screen_name, count: count }, function(err, data, response) {
     if(!err) {
       data.forEach(function(element) {
         /* fcode is the twitter ID encoded to make it shorter */
