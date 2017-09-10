@@ -33,7 +33,7 @@ const T = new Twit( config.get('twitter') );
 //let screen_names =['dril']
 //let hashtags = ['ferrets']
 let count = 2
-let screen_names = config.get('ferrits.screen_names')
+let screen_names = _.shuffle(config.get('ferrits.screen_names'))
 let hashtags = config.get('ferrits.hashtags')
 //let count = config.get('ferrits.count')
 
