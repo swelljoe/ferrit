@@ -4,84 +4,84 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/picnic@6.4.0/picnic.min.css">
-  <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-  <link rel="icon" type="image/png" href="{{my_logo}}">
-  <script src="https://use.fontawesome.com/b7d9aa9e12.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/picnic@6.4.0/picnic.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+	<link rel="icon" type="image/png" href="{{my_logo}}">
+	<script src="https://use.fontawesome.com/b7d9aa9e12.js"></script>
 	<title>{{screen_name}} ferrified facts</title>
 
-  <meta property="og:url"           content="{{my_url}}/{{screen_name}}" />
-  <meta property="og:type"          content="website" />
-  <meta property="og:title"         content="{{screen_name}} ferrified" />
-  <meta property="og:description"   content="Verified by tweets, the truest facts of all" />
-  <meta property="og:image"         content="{{my_url}}/{{my_logo}}" />
+	<meta property="og:url"           content="{{my_url}}/{{screen_name}}" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="{{screen_name}} ferrified" />
+	<meta property="og:description"   content="Verified by tweets, the truest facts of all" />
+	<meta property="og:image"         content="{{my_url}}/{{my_logo}}" />
 
 </head>
 
 <body>
-<div class='top-fixed'><div class="top-message">Media for the 69...nice...million</div></div>
-<nav class="header">
-  <a href="#" class="brand">
-    <img class="logo" src="{{my_logo}}" />
-  </a>
+	<div class='top-fixed'><div class="top-message">Media for the 69...nice...million</div></div>
+	<nav class="header">
+		<a href="/" class="brand">
+			<img class="logo" src="{{my_logo}}" />
+		</a>
 
-  <div class="menu">
-    <a href="http://twitter.com/ferritus" class="pseudo button fa fa-twitter" alt="twitter">
-    </a>
-		<label for="modal_hashtags" class="pseudo button fa fa-hashtag"></label>
-    <label for="modal_users" class="pseudo button fa fa-user"></label>
-  </div>
-</nav>
-
-<div class="modal">
-	<input id="modal_hashtags" type="checkbox" />
-	<label for="modal_hashtags" class="overlay"></label>
-	<article>
-		<section class="content">
-		<div class="flex two">
-		{{#each hashtags}}
-			<div>
-				<a class="pseudo button" href="/hashtags/{{this}}">#{{this}}</a>
-			</div>
-		{{/each}}
-		</section>
+		<div class="menu">
+			<a href="http://twitter.com/ferritus" class="pseudo button fa fa-twitter" alt="twitter">
+			</a>
+			<label for="modal_hashtags" class="pseudo button fa fa-hashtag"></label>
+			<label for="modal_users" class="pseudo button fa fa-user"></label>
 		</div>
-	</article>
-</div>
+	</nav>
 
-<div class="modal">
-	<input id="modal_users" type="checkbox" />
-	<label for="modal_users" class="overlay"></label>
-	<article>
-		<section class="content">
-		<div class="flex two">
-		{{#each screen_names}}
-			<div>
-				<a class="pseudo button" href="/{{this}}">@{{this}}</a>
+	<div class="modal">
+		<input id="modal_hashtags" type="checkbox" />
+		<label for="modal_hashtags" class="overlay"></label>
+		<article>
+			<section class="content">
+				<div class="flex two">
+					{{#each hashtags}}
+					<div>
+						<a class="pseudo button" href="/hashtags/{{this}}">#{{this}}</a>
+					</div>
+					{{/each}}
+				</section>
 			</div>
-		{{/each}}
-		</section>
-		</div>
-	</article>
-</div>
-
-<div class="container">
-<div class="flex two">
-	{{#each fcodes}}
-	<div class='ferrit'>
-  	<a href='/{{@key}}'>
-    	<img class='ferrit' src='/img/{{@key}}.png' alt='{{this}}'></a>
+		</article>
 	</div>
-	{{/each}}
-</div>
-</div>
+
+	<div class="modal">
+		<input id="modal_users" type="checkbox" />
+		<label for="modal_users" class="overlay"></label>
+		<article>
+			<section class="content">
+				<div class="flex two">
+					{{#each screen_names}}
+					<div>
+						<a class="pseudo button" href="/{{this}}">@{{this}}</a>
+					</div>
+					{{/each}}
+				</section>
+			</div>
+		</article>
+	</div>
+
+	<div class="container">
+		<div class="flex two">
+			{{#each fcodes}}
+			<div class='ferrit'>
+				<a href='/{{@key}}'>
+				<img class='ferrit' src='/img/{{@key}}.png' alt='{{this}}'></a>
+			</div>
+			{{/each}}
+		</div>
+	</div>
 </body>
 
-<script>
-document.onkeydown = function(e){
-  if (e.keyCode == 27) {
-    var mods = document.querySelectorAll('.modal > [type=checkbox]');
-    [].forEach.call(mods, function(mod){ mod.checked = false; });
-  }
-}
-</script>
+	<script>
+	document.onkeydown = function(e){
+		if (e.keyCode == 27) {
+			var mods = document.querySelectorAll('.modal > [type=checkbox]');
+			[].forEach.call(mods, function(mod){ mod.checked = false; });
+		}
+	}
+	</script>

@@ -30,14 +30,13 @@ in twitter section and don't check that file into git. */
 const T = new Twit( config.get('twitter') );
 
 /* Fun time happy globals! */
-let screen_names =['dril']
-let hashtags = ['ferrets']
+//let screen_names =['dril']
+//let hashtags = ['ferrets']
 let count = 2
-//let screen_names = config.get('ferrits.screen_names')
-//let hashtags = config.get('ferrits.hashtags')
+let screen_names = config.get('ferrits.screen_names')
+let hashtags = config.get('ferrits.hashtags')
 //let count = config.get('ferrits.count')
 
-let best_tweets = {}
 let best_user_tweets = {}
 let best_hashtag_tweets = {}
 
@@ -47,13 +46,12 @@ async function main() {
       generate_user_pages(screen_names, hashtags),
       generate_hashtag_pages(screen_names, hashtags)
   ]).then(function(results) {
-    make_hot_index(results)
+    make_hot_index(results, screen_names, hashtags)
   })
 }
 
-async function make_hot_index(best_tweets) {
-  let all_best_tweets = _.extend(best_tweets[0], best_tweets[1])
-  all_best_tweets = _.filter(all_best_tweets, function(o) { return Object.keys(o).length !== 0})
+async function make_hot_index(best_tweets, screen_names, hashtags) {
+  let all_best_tweets = _.assignIn(best_tweets[0], best_tweets[1])
   console.log(all_best_tweets)
   let html = await gen_index_page('index_hot', all_best_tweets, 'hot', screen_names, hashtags)
   writepage('', 'index', html)
@@ -71,14 +69,14 @@ async function generate_user_pages (screen_names, hashtags) {
       writepage(screen_name + '/', 'index', indexhtml)
       let best_tweet = await get_best_tweet(statuses)
       if (best_tweet) {
-        best_user_tweets[screen_name] = best_tweet /* hot */
+        best_user_tweets[best_tweet[0]] = best_tweet[1] /* hot */
       }
     }
     catch (err) {
       throw (err)
     }
-    return best_user_tweets
   }
+  return best_user_tweets
 }
 
 /* same as above for hashtags. This is embarrasingly repeating myself */
@@ -93,14 +91,14 @@ async function generate_hashtag_pages (screen_names, hashtags) {
       writepage('hashtags/' + hashtag + '/', 'index', indexhtml)
       let best_tweet = await get_best_tweet(data['statuses'])
       if (best_tweet) {
-        best_hashtag_tweets[hashtag] = best_tweet
+        best_hashtag_tweets[best_tweet[0]] = best_tweet[1]
       }
-      return best_hashtag_tweets
     }
     catch (err) {
       throw (err)
     }
   }
+  return best_hashtag_tweets
 }
 
 async function get_statuses(endpoint, options) {
@@ -129,31 +127,25 @@ async function ferrify_tweets(data, screen_name, hashtag, screen_names, hashtags
       let fcode = alphanumtwid.encode(element['id'])
       let html = await gen_single_page(fcode, element, screen_names, hashtags, hashtag)
       writepage('', fcode, html)
-      return (data)
   }
-//, function(err) {
-//      if(err) {
-//        throw(err)
-//      }
-//      else {
-//        return (data)
-//      }
-//    })
+  return data
 }
 
 // best_tweet(statuses)
 // Return the most favorited tweet for this user or hashtag
 async function get_best_tweet(statuses) {
-  let best_tweet = {}
+  let best_tweet
+  let best_fcode
   statuses.forEach(function(element) {
     let max = 0
     let fcode = alphanumtwid.encode(element['id'])
     if(max < element['favorite_count'] ) {
       max = element['favorite_count']
-      best_tweet[fcode] = element['text']
+      best_fcode = fcode
+      best_tweet = element['text']
     }
   })
-  return best_tweet
+  return [best_fcode, best_tweet]
 }
 
 /* genqr(fcode)
