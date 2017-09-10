@@ -25,6 +25,7 @@
   "homepage": "https://github.com/swelljoe/ferrit#readme",
   "dependencies": {
     "alphanumeric-twitter-id": "^1.0.0",
+    "async": "^2.5.0",
     "config": "^1.26.2",
     "fs-extra": "^4.0.1",
     "handlebars": "^4.0.10",
