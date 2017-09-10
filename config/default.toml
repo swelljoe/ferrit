@@ -2,6 +2,7 @@
 my_url = 'http://ferrit.us'
 my_name = 'ferrit!'
 my_twitter = 'ferritus'
+my_logo = '/assets/img/ferrit-circle.png'
 
 [twitter]
 consumer_key = ''
@@ -10,5 +11,6 @@ access_token = ''
 access_token_secret = ''
 
 [ferrits]
+count = 12
 screen_names = [ 'dril', 'dog_rates' ]
 hashtags = [ '#ferrets' ]

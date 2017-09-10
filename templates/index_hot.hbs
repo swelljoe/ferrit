@@ -4,17 +4,17 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/picnic@6.4.0/picnic.min.css">
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-	<link rel="icon" type="image/png" href="{{my_logo}}">
-	<script src="https://use.fontawesome.com/b7d9aa9e12.js"></script>
-	<title>{{screen_name}} ferrified facts</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/picnic@6.4.0/picnic.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+  <link rel="icon" type="image/png" href="{{my_logo}}">
+  <script src="https://use.fontawesome.com/b7d9aa9e12.js"></script>
+	<title>The hottest tweet-verified takes</title>
 
-	<meta property="og:url"           content="{{my_url}}/{{screen_name}}" />
-	<meta property="og:type"          content="website" />
-	<meta property="og:title"         content="{{screen_name}} ferrified" />
-	<meta property="og:description"   content="Verified by tweets, the truest facts of all" />
-	<meta property="og:image"         content="{{my_url}}/{{my_logo}}" />
+  <meta property="og:url"           content="{{my_url}}/" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Hottest ferrified facts" />
+  <meta property="og:description"   content="Verified by tweets, the truest facts of all" />
+  <meta property="og:image"         content="{{my_url}}/{{my_logo}}" />
 
 </head>
 
@@ -44,8 +44,8 @@
 						<a class="pseudo button" href="/hashtags/{{this}}">#{{this}}</a>
 					</div>
 					{{/each}}
-				</section>
-			</div>
+				</div>
+			</section>
 		</article>
 	</div>
 
@@ -77,11 +77,11 @@
 	</div>
 </body>
 
-	<script>
-	document.onkeydown = function(e){
-		if (e.keyCode == 27) {
-			var mods = document.querySelectorAll('.modal > [type=checkbox]');
-			[].forEach.call(mods, function(mod){ mod.checked = false; });
-		}
-	}
-	</script>
+<script>
+document.onkeydown = function(e){
+  if (e.keyCode == 27) {
+    var mods = document.querySelectorAll('.modal > [type=checkbox]');
+    [].forEach.call(mods, function(mod){ mod.checked = false; });
+  }
+}
+</script>
