@@ -43,29 +43,21 @@ let best_hashtag_tweets = {}
 
 /* This is bloody awful. I'm still figuring out how async works in node */
 async function main() {
-  async.parallel([
-    function(callback) {
-      generate_user_pages(screen_names, hashtags)
-    },
-    function(callback) {
+  Promise.all([
+      generate_user_pages(screen_names, hashtags),
       generate_hashtag_pages(screen_names, hashtags)
-    }
-  ],
-  function(err, results) {
-    if(!err) {
-      console.log(results)
-      console.log('Something: ' + best_user_tweets)
-      make_hot_index(results)
-    }
-    else { throw (err) }
+  ]).then(function(results) {
+    console.log(results)
+    make_hot_index(results)
   })
 }
 
 async function make_hot_index(best_tweets) {
   let all_best_tweets = _.extend(best_tweets[0], best_tweets[1])
+  console.log(all_best_tweets)
   try {
-    //let html = await gen_index_page('index_hot', Object.values(all_best_tweets), screen_names, hashtags)
-    //writepage('', 'index', html)
+    let html = await gen_index_page('index_hot', Object.values(all_best_tweets), screen_names, hashtags)
+    writepage('', 'index', html)
   }
   catch (err) {
     throw (err)
@@ -79,7 +71,6 @@ async function generate_user_pages (screen_names, hashtags) {
     try {
       const statuses = await get_statuses('statuses/user_timeline', { screen_name: screen_name, count: count })
       const fcodes = await get_fcodes(statuses)
-      console.log(fcodes)
       await ferrify_tweets(statuses, screen_name, false, screen_names, hashtags)
       let indexhtml = await gen_index_page('index_user', fcodes, screen_name, screen_names, hashtags)
       writepage(screen_name + '/', 'index', indexhtml)
@@ -102,7 +93,6 @@ async function generate_hashtag_pages (screen_names, hashtags) {
       const data = await get_statuses('search/tweets', { q: '#' + hashtag, count: count })
       const statuses = data['statuses']
       const fcodes = await get_fcodes(data['statuses'])
-      console.log(fcodes)
       await ferrify_tweets(data['statuses'], false, hashtag, screen_names, hashtags)
       let indexhtml = await gen_index_page('index_hashtag', fcodes, hashtag, screen_names, hashtags)
       writepage('hashtags/' + hashtag + '/', 'index', indexhtml)
@@ -142,6 +132,7 @@ async function ferrify_tweets(data, screen_name, hashtag, screen_names, hashtags
   async.each(data, function(element, callback) {
     let fcode = alphanumtwid.encode(element['id'])
     let html = gen_single_page(fcode, element, screen_names, hashtags, hashtag)
+    writepage('', fcode, html)
     callback()
   }, function(err) {
     if(err) {
@@ -195,12 +186,7 @@ async function genimage (fcode, element) {
 
 /* Generate a single page for one tweet. */
 async function gen_single_page (fcode, element, screen_names, hashtags, hashtag) {
-  try {
-    let qrname = await genqr(fcode)
-  }
-  catch (err) {
-    throw (err)
-  }
+  let qrname = await genqr(fcode)
   genimage(fcode, element)
 
   let created_at = moment(element['created_at'], 'dd MMM DD HH:mm:ss ZZ YYYY').format('MM/DD/YYYY')
