@@ -47,21 +47,16 @@ async function main() {
       generate_user_pages(screen_names, hashtags),
       generate_hashtag_pages(screen_names, hashtags)
   ]).then(function(results) {
-    console.log(results)
     make_hot_index(results)
   })
 }
 
 async function make_hot_index(best_tweets) {
   let all_best_tweets = _.extend(best_tweets[0], best_tweets[1])
+  all_best_tweets = _.filter(all_best_tweets, function(o) { return Object.keys(o).length !== 0})
   console.log(all_best_tweets)
-  try {
-    let html = await gen_index_page('index_hot', Object.values(all_best_tweets), screen_names, hashtags)
-    writepage('', 'index', html)
-  }
-  catch (err) {
-    throw (err)
-  }
+  let html = await gen_index_page('index_hot', all_best_tweets, 'hot', screen_names, hashtags)
+  writepage('', 'index', html)
   fs.copySync('assets/', 'public/assets/')
   console.log("Finished!")
 }
@@ -98,7 +93,7 @@ async function generate_hashtag_pages (screen_names, hashtags) {
       writepage('hashtags/' + hashtag + '/', 'index', indexhtml)
       let best_tweet = await get_best_tweet(data['statuses'])
       if (best_tweet) {
-        best_hash_tweets[hashtag] = best_tweet
+        best_hashtag_tweets[hashtag] = best_tweet
       }
       return best_hashtag_tweets
     }
@@ -129,31 +124,33 @@ function get_fcodes(statuses) {
 
 // maakes a page for all tweets in data, returns list of fcodes for the index
 async function ferrify_tweets(data, screen_name, hashtag, screen_names, hashtags) {
-  async.each(data, function(element, callback) {
-    let fcode = alphanumtwid.encode(element['id'])
-    let html = gen_single_page(fcode, element, screen_names, hashtags, hashtag)
-    writepage('', fcode, html)
-    callback()
-  }, function(err) {
-    if(err) {
-      throw(err)
-    }
-    else {
+  //async.each(data, function(element, callback) {
+  for (let element of data) {
+      let fcode = alphanumtwid.encode(element['id'])
+      let html = await gen_single_page(fcode, element, screen_names, hashtags, hashtag)
+      writepage('', fcode, html)
       return (data)
-    }
-  })
+  }
+//, function(err) {
+//      if(err) {
+//        throw(err)
+//      }
+//      else {
+//        return (data)
+//      }
+//    })
 }
 
 // best_tweet(statuses)
 // Return the most favorited tweet for this user or hashtag
 async function get_best_tweet(statuses) {
-  let best_tweet
+  let best_tweet = {}
   statuses.forEach(function(element) {
     let max = 0
     let fcode = alphanumtwid.encode(element['id'])
     if(max < element['favorite_count'] ) {
       max = element['favorite_count']
-      best_tweet = fcode
+      best_tweet[fcode] = element['text']
     }
   })
   return best_tweet
@@ -205,12 +202,12 @@ async function gen_single_page (fcode, element, screen_names, hashtags, hashtag)
   }
   let tmpl = fs.readFileSync('templates/single.hbs', 'utf8')
   let html = hbsToString(tmpl, context)
-  return (fcode, html)
+  return (html)
 }
 
 /* hbsToString(html, context)
 Combine handlebars template with data to make html */
-async function hbsToString (html, context) {
+function hbsToString (html, context) {
   let template = handlebars.compile(html)
   return template(context)
 }
