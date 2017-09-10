@@ -52,7 +52,7 @@ async function main() {
 
 async function make_hot_index(best_tweets, screen_names, hashtags) {
   let all_best_tweets = _.assignIn(best_tweets[0], best_tweets[1])
-  console.log(all_best_tweets)
+  all_best_tweets = _.pickBy(all_best_tweets, _.identity)
   let html = await gen_index_page('index_hot', all_best_tweets, 'hot', screen_names, hashtags)
   writepage('', 'index', html)
   fs.copySync('assets/', 'public/assets/')
@@ -122,7 +122,8 @@ function get_fcodes(statuses) {
 
 // maakes a page for all tweets in data, returns list of fcodes for the index
 async function ferrify_tweets(data, screen_name, hashtag, screen_names, hashtags) {
-  //async.each(data, function(element, callback) {
+  let name = (screen_name || hashtag)
+  console.log('  Generating ' + data.length + ' single tweet pages for ' + name)
   for (let element of data) {
       let fcode = alphanumtwid.encode(element['id'])
       let html = await gen_single_page(fcode, element, screen_names, hashtags, hashtag)
@@ -216,6 +217,7 @@ async function writepage (path, fname, html) {
 
 /* Generate an index page for all tweets by one user. */
 async function gen_index_page (template, fcodes, name, screen_names, hashtags) {
+  console.log('Beginning generation of index with ' + Object.keys(fcodes).length + ' items for ' + name)
   let context = {
     screen_name: name,
     screen_names: screen_names,
