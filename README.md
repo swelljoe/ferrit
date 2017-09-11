@@ -3,6 +3,8 @@ Ferrit!
 
 This is a static site generator that generates (roughly) a clone of Verrit, the neo-liberal propaganda outlet that's been making the rounds on the twitterverse this week. I though it was funny. I thought a Verrit with @dril tweets would be better, so I made one.
 
+See it in action here: [ferrit.us](http://ferrit.us)
+
 # Install dependencies
 
 You'll need node (I developed on 8.4.0, and used some newish features), Graphics Magick in your path (the `gm` command), and the `bash` shell (there is a small bash helper program in `sh` to generate the images using `gm`).
