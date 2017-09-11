@@ -177,6 +177,7 @@ async function gen_single_page (fcode, element, screen_names, hashtags, hashtag)
   genimage(fcode, element)
 
   let created_at = moment(element['created_at'], 'dd MMM DD HH:mm:ss ZZ YYYY').format('MM/DD/YYYY')
+  let shorttext = trunc(element['text'], element['user']['screen_name'])
   let context = {
     screen_name: element['user']['screen_name'],
     hashtag: hashtag,
@@ -186,6 +187,7 @@ async function gen_single_page (fcode, element, screen_names, hashtags, hashtag)
     created_at: created_at,
     fcode: fcode,
     text: element['text'],
+    shorttext,
     my_url: my_url,
     my_twitter: my_twitter,
     my_logo: my_logo
@@ -235,9 +237,15 @@ function escapeShellArg (arg) {
   return string.replace(/'/g, `"'"`) // Unicode ' isn't special to shell
 }
 
-try {
-  main()
+function trunc (text, screen_name) {
+  let extra = (my_url + screen_name + 'http://"RT @ ...."').length
+  console.log(extra)
+  if (text.length > 140-extra) {
+    return ('"' + (text.substring(0,140-extra)).replace(/[\s+]$/, '') + '..."')
+  }
+  else {
+    return ('"' + text + '"')
+  }
 }
-catch (err) {
-  console.log(err)
-}
+
+main()
