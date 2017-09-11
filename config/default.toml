@@ -14,3 +14,6 @@ access_token_secret = ''
 count = 12
 screen_names = [ 'dril', 'dog_rates' ]
 hashtags = [ '#ferrets' ]
+
+[pages]
+path = 'md'
