@@ -25,7 +25,7 @@ Differences:
 Sames:
 
   - Authentication codes! (And, also QR codes, because they're also dumb.)
-  - Slick design. though I'm not using any of their resources, as that seemed like cheating. I rebuilt it from scratch in Inkscape and using the awesome Picnic CSS microframework. But, it's inspired by their design, so it's pretty similar, but not identical. Visual design may be the one thing they did OK on.
+  - Slick design. I built everything from scratch, but very similar (i.e. I didn't borrow their images or style sheets, it is rebuilt in similar style from the ground up).
   - It's pointless and will probably be dead in a month.
 
 # Really, what's the deal with authentication codes?
