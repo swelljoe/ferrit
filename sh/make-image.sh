@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-message=$(echo $1 | fold -s -w45 -)
+message=$(echo $1 | fold -s -w45 - | sed 's/\&amp;/\&/')
 author=$2
 date=$(date +%D -d "$3")
 ferritcode=$4
