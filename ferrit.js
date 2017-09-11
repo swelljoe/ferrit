@@ -239,7 +239,6 @@ function escapeShellArg (arg) {
 
 function trunc (text, screen_name) {
   let extra = (my_url + screen_name + 'http://"RT @ ...."').length
-  console.log(extra)
   if (text.length > 140-extra) {
     return ('"' + (text.substring(0,140-extra)).replace(/[\s+]$/, '') + '..."')
   }
