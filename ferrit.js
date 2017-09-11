@@ -30,12 +30,9 @@ in twitter section and don't check that file into git. */
 const T = new Twit( config.get('twitter') );
 
 /* Fun time happy globals! */
-//let screen_names =['dril']
-//let hashtags = ['ferrets']
-let count = 2
 let screen_names = _.shuffle(config.get('ferrits.screen_names'))
 let hashtags = config.get('ferrits.hashtags')
-//let count = config.get('ferrits.count')
+let count = config.get('ferrits.count')
 
 let best_user_tweets = {}
 let best_hashtag_tweets = {}
