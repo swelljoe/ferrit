@@ -187,7 +187,7 @@ async function gen_single_page (fcode, element, screen_names, hashtags, hashtag)
     created_at: created_at,
     fcode: fcode,
     text: element['text'],
-    shorttext,
+    shorttext: shorttext,
     my_url: my_url,
     my_twitter: my_twitter,
     my_logo: my_logo
