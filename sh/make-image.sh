@@ -4,7 +4,6 @@ author=$2
 date=$(date +%D -d "$3")
 ferritcode=$4
 
-echo "$@" >> make-image.log
 mkdir -p tmp/
 mkdir -p public/img
 
