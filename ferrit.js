@@ -177,7 +177,7 @@ async function gen_single_page (fcode, element, screen_names, hashtags, hashtag)
   genimage(fcode, element)
 
   let created_at = moment(element['created_at'], 'dd MMM DD HH:mm:ss ZZ YYYY').format('MM/DD/YYYY')
-  let shorttext = trunc(element['text'], element['user']['screen_name'])
+  let shorttext = encodeURIComponent(trunc(element['text'], element['user']['screen_name']))
   let context = {
     screen_name: element['user']['screen_name'],
     hashtag: hashtag,
