@@ -76,13 +76,14 @@
 <meta name="twitter:title" content="Tweet-verified fact">
 <meta name="twitter:description" content="#ferritfacts">
 <meta name="twitter:image" content="{{my_url}}/img/{{fcode}}.png">
+<meta name="twitter:image:src" content="{{my_url}}/img/{{fcode}}.png">
 
 <div class="social-bar">
-	<a class="pseudo button fa fa-twitter twitter-share-button" href="https://twitter.com/share?text={{my_url}}/{{fcode}}&amp;via={{my_twitter}}" class="twitter-share-button"
+	<a class="pseudo button fa fa-twitter twitter-share-button" href="https://twitter.com/share?text={{text}}&amp;via={{my_twitter}}" class="twitter-share-button"
 		data-hashtags="ferritfacts" data-related="ferritus"
 		data-show-count="false"></a>
 	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <a class='pseudo button fa fa-facebook facebook-share' href='https://www.facebook.com/sharer/sharer.php?u={{my_url}}/{{fcode}}' alt='Share on facebook'></a>
+  <a class='pseudo button fa fa-facebook facebook-share' href='https://www.facebook.com/sharer/sharer.php?u=&quot;{{my_url}}/{{fcode}}&quot;' alt='Share on facebook'></a>
 	<a class='pseudo button fa fa-envelope' href='mailto:?subject=Check out what {{screen_name}} tweeted&amp;body="{{text}}" - {{my_url}}/{{fcode}}' alt='Share via email'></a>
 	<a class='pseudo button fa fa-download' href='/img/{{fcode}}.png'></a>
 </div>
