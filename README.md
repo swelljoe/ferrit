@@ -24,7 +24,7 @@ Copy the contents of `public` to your web server document root. For Ferrit code 
 # Configure nginx to serve "fcode.html" if given "fcode"
 
 ```
-location ~ / {
+location / {
     alias /home/domain/public_html/;
     try_files $uri $uri/index.html $uri.html =404;
 }
